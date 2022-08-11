@@ -30,5 +30,3 @@ message MovementsResponse {
 //
 //message HeartRateResponse {
 //  string heartRateMessage = 1;
-
-}

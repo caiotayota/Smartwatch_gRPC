@@ -59,7 +59,7 @@ public class SleepMonitoringClient {
                 if (hasMoved) {
                     requestStreamObserver.onNext(MovementRequest.newBuilder().setMovement(true).build());
                     continuousMovement++;
-                    System.out.println("Body movement detected!");
+                    System.out.println("Body movement detected! Sending to the server");
                     if (continuousMovement >= 5) { // If detected 5 body movement in a row, is presumed that the person is awake
                         isAwake = true;
                     }

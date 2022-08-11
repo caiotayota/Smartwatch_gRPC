@@ -1,5 +1,6 @@
 package com.caiotayota.smartwatch.sleepMonitoring;
 
+import com.caiotayota.smartwatch.jmDNS.SimpleServiceRegistration;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
