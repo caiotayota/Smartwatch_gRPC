@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "smartwatch.sleepmonitoring";
+option java_outer_classname = "SleepMonitoringImpl";
+
+package sleepmonitoring;
+
+// Interface exported by the server.
+service SleepMonitoring {
+
+  // Client streaming
+  rpc movementTracker(stream MovementTracked) returns (TotalMovementsResponse) {}
+
+  rpc heartRateTracker(stream heartRateRequest) returns (heartRateResponse) {}
+
+}
+
+message MovementTracked {
+  bool movement = 1;
+}
+
+message TotalMovementsResponse {
+  int32 totalMovements = 1;
+}
+
+message heartRateRequest {
+  int32 heartBeat = 1;
+  int32 seconds = 2;
+}
+
+message heartRateResponse {
+  string heartRate = 1;
+
+}
