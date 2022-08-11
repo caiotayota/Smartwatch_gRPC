@@ -1,27 +1,27 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "smartwatch.sleepmonitoring";
+option java_package = "com.caiotayota.smartwatch.sleepMonitoring";
 option java_outer_classname = "SleepMonitoringImpl";
 
-package sleepmonitoring;
+package sleepMonitoring;
 
 // Interface exported by the server.
-service SleepMonitoring {
+service SleepMonitoringService {
 
   // Client streaming
-  rpc movementTracker(stream MovementTracked) returns (TotalMovementsResponse) {}
+  rpc trackMovement(stream MovementRequest) returns (TotalMovementsResponse);
 
-  rpc heartRateTracker(stream heartRateRequest) returns (heartRateResponse) {}
+  rpc trackHeartRate(stream heartRateRequest) returns (stream heartRateResponse);
 
 }
 
-message MovementTracked {
+message MovementRequest {
   bool movement = 1;
 }
 
 message TotalMovementsResponse {
-  int32 totalMovements = 1;
+  string totalMovements = 1;
 }
 
 message heartRateRequest {
