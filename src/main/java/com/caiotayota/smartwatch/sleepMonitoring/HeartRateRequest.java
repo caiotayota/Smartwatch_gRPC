@@ -4,19 +4,19 @@
 package com.caiotayota.smartwatch.sleepMonitoring;
 
 /**
- * Protobuf type {@code sleepMonitoring.TotalMovementsResponse}
+ * Protobuf type {@code sleepMonitoring.HeartRateRequest}
  */
-public  final class TotalMovementsResponse extends
+public  final class HeartRateRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:sleepMonitoring.TotalMovementsResponse)
-    TotalMovementsResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:sleepMonitoring.HeartRateRequest)
+    HeartRateRequestOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use TotalMovementsResponse.newBuilder() to construct.
-  private TotalMovementsResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use HeartRateRequest.newBuilder() to construct.
+  private HeartRateRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private TotalMovementsResponse() {
-    totalMovements_ = "";
+  private HeartRateRequest() {
+    heartBeatPerSecond_ = 0D;
   }
 
   @java.lang.Override
@@ -24,7 +24,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private TotalMovementsResponse(
+  private HeartRateRequest(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -43,10 +43,9 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 9: {
 
-            totalMovements_ = s;
+            heartBeatPerSecond_ = input.readDouble();
             break;
           }
           default: {
@@ -70,49 +69,24 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringImpl.internal_static_sleepMonitoring_TotalMovementsResponse_descriptor;
+    return com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringImpl.internal_static_sleepMonitoring_HeartRateRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringImpl.internal_static_sleepMonitoring_TotalMovementsResponse_fieldAccessorTable
+    return com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringImpl.internal_static_sleepMonitoring_HeartRateRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse.class, com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse.Builder.class);
+            com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest.class, com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest.Builder.class);
   }
 
-  public static final int TOTALMOVEMENTS_FIELD_NUMBER = 1;
-  private volatile java.lang.Object totalMovements_;
+  public static final int HEARTBEATPERSECOND_FIELD_NUMBER = 1;
+  private double heartBeatPerSecond_;
   /**
-   * <code>string totalMovements = 1;</code>
+   * <code>double heartBeatPerSecond = 1;</code>
    */
-  public java.lang.String getTotalMovements() {
-    java.lang.Object ref = totalMovements_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      totalMovements_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string totalMovements = 1;</code>
-   */
-  public com.google.protobuf.ByteString
-      getTotalMovementsBytes() {
-    java.lang.Object ref = totalMovements_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      totalMovements_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public double getHeartBeatPerSecond() {
+    return heartBeatPerSecond_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -129,8 +103,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getTotalMovementsBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, totalMovements_);
+    if (heartBeatPerSecond_ != 0D) {
+      output.writeDouble(1, heartBeatPerSecond_);
     }
     unknownFields.writeTo(output);
   }
@@ -141,8 +115,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getTotalMovementsBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, totalMovements_);
+    if (heartBeatPerSecond_ != 0D) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeDoubleSize(1, heartBeatPerSecond_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -154,14 +129,16 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse)) {
+    if (!(obj instanceof com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest)) {
       return super.equals(obj);
     }
-    com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse other = (com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse) obj;
+    com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest other = (com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest) obj;
 
     boolean result = true;
-    result = result && getTotalMovements()
-        .equals(other.getTotalMovements());
+    result = result && (
+        java.lang.Double.doubleToLongBits(getHeartBeatPerSecond())
+        == java.lang.Double.doubleToLongBits(
+            other.getHeartBeatPerSecond()));
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -173,76 +150,77 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + TOTALMOVEMENTS_FIELD_NUMBER;
-    hash = (53 * hash) + getTotalMovements().hashCode();
+    hash = (37 * hash) + HEARTBEATPERSECOND_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        java.lang.Double.doubleToLongBits(getHeartBeatPerSecond()));
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse parseFrom(
+  public static com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse parseFrom(
+  public static com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse parseFrom(
+  public static com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse parseFrom(
+  public static com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse parseFrom(byte[] data)
+  public static com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse parseFrom(
+  public static com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse parseFrom(java.io.InputStream input)
+  public static com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse parseFrom(
+  public static com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse parseDelimitedFrom(java.io.InputStream input)
+  public static com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse parseDelimitedFrom(
+  public static com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse parseFrom(
+  public static com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse parseFrom(
+  public static com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -255,7 +233,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse prototype) {
+  public static Builder newBuilder(com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -271,26 +249,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code sleepMonitoring.TotalMovementsResponse}
+   * Protobuf type {@code sleepMonitoring.HeartRateRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:sleepMonitoring.TotalMovementsResponse)
-      com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:sleepMonitoring.HeartRateRequest)
+      com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringImpl.internal_static_sleepMonitoring_TotalMovementsResponse_descriptor;
+      return com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringImpl.internal_static_sleepMonitoring_HeartRateRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringImpl.internal_static_sleepMonitoring_TotalMovementsResponse_fieldAccessorTable
+      return com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringImpl.internal_static_sleepMonitoring_HeartRateRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse.class, com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse.Builder.class);
+              com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest.class, com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest.Builder.class);
     }
 
-    // Construct using com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse.newBuilder()
+    // Construct using com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -308,7 +286,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      totalMovements_ = "";
+      heartBeatPerSecond_ = 0D;
 
       return this;
     }
@@ -316,17 +294,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringImpl.internal_static_sleepMonitoring_TotalMovementsResponse_descriptor;
+      return com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringImpl.internal_static_sleepMonitoring_HeartRateRequest_descriptor;
     }
 
     @java.lang.Override
-    public com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse getDefaultInstanceForType() {
-      return com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse.getDefaultInstance();
+    public com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest getDefaultInstanceForType() {
+      return com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse build() {
-      com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse result = buildPartial();
+    public com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest build() {
+      com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -334,9 +312,9 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse buildPartial() {
-      com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse result = new com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse(this);
-      result.totalMovements_ = totalMovements_;
+    public com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest buildPartial() {
+      com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest result = new com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest(this);
+      result.heartBeatPerSecond_ = heartBeatPerSecond_;
       onBuilt();
       return result;
     }
@@ -375,19 +353,18 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse) {
-        return mergeFrom((com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse)other);
+      if (other instanceof com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest) {
+        return mergeFrom((com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse other) {
-      if (other == com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse.getDefaultInstance()) return this;
-      if (!other.getTotalMovements().isEmpty()) {
-        totalMovements_ = other.totalMovements_;
-        onChanged();
+    public Builder mergeFrom(com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest other) {
+      if (other == com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest.getDefaultInstance()) return this;
+      if (other.getHeartBeatPerSecond() != 0D) {
+        setHeartBeatPerSecond(other.getHeartBeatPerSecond());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -404,11 +381,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse parsedMessage = null;
+      com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse) e.getUnfinishedMessage();
+        parsedMessage = (com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -418,71 +395,28 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object totalMovements_ = "";
+    private double heartBeatPerSecond_ ;
     /**
-     * <code>string totalMovements = 1;</code>
+     * <code>double heartBeatPerSecond = 1;</code>
      */
-    public java.lang.String getTotalMovements() {
-      java.lang.Object ref = totalMovements_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        totalMovements_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    public double getHeartBeatPerSecond() {
+      return heartBeatPerSecond_;
     }
     /**
-     * <code>string totalMovements = 1;</code>
+     * <code>double heartBeatPerSecond = 1;</code>
      */
-    public com.google.protobuf.ByteString
-        getTotalMovementsBytes() {
-      java.lang.Object ref = totalMovements_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        totalMovements_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string totalMovements = 1;</code>
-     */
-    public Builder setTotalMovements(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      totalMovements_ = value;
+    public Builder setHeartBeatPerSecond(double value) {
+      
+      heartBeatPerSecond_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string totalMovements = 1;</code>
+     * <code>double heartBeatPerSecond = 1;</code>
      */
-    public Builder clearTotalMovements() {
+    public Builder clearHeartBeatPerSecond() {
       
-      totalMovements_ = getDefaultInstance().getTotalMovements();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string totalMovements = 1;</code>
-     */
-    public Builder setTotalMovementsBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      totalMovements_ = value;
+      heartBeatPerSecond_ = 0D;
       onChanged();
       return this;
     }
@@ -499,41 +433,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:sleepMonitoring.TotalMovementsResponse)
+    // @@protoc_insertion_point(builder_scope:sleepMonitoring.HeartRateRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:sleepMonitoring.TotalMovementsResponse)
-  private static final com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:sleepMonitoring.HeartRateRequest)
+  private static final com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse();
+    DEFAULT_INSTANCE = new com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest();
   }
 
-  public static com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse getDefaultInstance() {
+  public static com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<TotalMovementsResponse>
-      PARSER = new com.google.protobuf.AbstractParser<TotalMovementsResponse>() {
+  private static final com.google.protobuf.Parser<HeartRateRequest>
+      PARSER = new com.google.protobuf.AbstractParser<HeartRateRequest>() {
     @java.lang.Override
-    public TotalMovementsResponse parsePartialFrom(
+    public HeartRateRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new TotalMovementsResponse(input, extensionRegistry);
+      return new HeartRateRequest(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<TotalMovementsResponse> parser() {
+  public static com.google.protobuf.Parser<HeartRateRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<TotalMovementsResponse> getParserForType() {
+  public com.google.protobuf.Parser<HeartRateRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.caiotayota.smartwatch.sleepMonitoring.TotalMovementsResponse getDefaultInstanceForType() {
+  public com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

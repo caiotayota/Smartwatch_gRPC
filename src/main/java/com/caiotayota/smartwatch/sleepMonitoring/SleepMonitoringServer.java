@@ -1,15 +1,15 @@
 package com.caiotayota.smartwatch.sleepMonitoring;
 
-import com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringServiceGrpc.SleepMonitoringServiceImplBase;
-
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Logger;
 
-public class SleepMonitoringServer extends SleepMonitoringServiceImplBase{
+public class SleepMonitoringServer extends SleepMonitoringServiceGrpc.SleepMonitoringServiceImplBase {
 
     private static final Logger logger = Logger.getLogger(SleepMonitoringServer.class.getName());
 
@@ -28,7 +28,9 @@ public class SleepMonitoringServer extends SleepMonitoringServiceImplBase{
                     .addService(sleepMonitoringServer)
                     .build()
                     .start();
-            System.out.println("Sleep Monitoring Server started");
+
+            logger.info("Sleep Monitoring: Server started, listening on port " + port);
+            System.out.println("Receiving movement requests...");
 
             server.awaitTermination();
 
@@ -40,35 +42,95 @@ public class SleepMonitoringServer extends SleepMonitoringServiceImplBase{
     }
 
     @Override
-    public StreamObserver<MovementRequest> trackMovement(StreamObserver<TotalMovementsResponse> responseObserver) {
+    public StreamObserver<MovementRequest> trackMovement(StreamObserver<MovementsResponse> responseObserver) {
         return new StreamObserver<MovementRequest>() {
 
             int totalMovements = 0;
 
             @Override
             public void onNext(MovementRequest value) {
-               // boolean moving = Math.round(Math.random()) == 0 ? false : true; // Random values simulating sensor data
-
                 if (value.getMovement()) {
                     totalMovements++;
-                    System.out.println("Movement detected by sensor");
+                    System.out.println("Movement request received: movement detected by sensor!");
                 }
-
             }
 
             @Override
-            public void onError(Throwable t) {
-
-            }
+            public void onError(Throwable t) {}
 
             @Override
             public void onCompleted() {
-                String responseMessage = "Total of movements during sleep: " + totalMovements;
-                TotalMovementsResponse response = TotalMovementsResponse.newBuilder().setTotalMovements(responseMessage).build();
+
+                String sleepQuality =
+                        totalMovements < 15 ? "Excellent" :
+                        totalMovements < 30 ? "Good" :
+                        totalMovements < 45 ? "Regular" :
+                        totalMovements < 60 ? "Bad" : "Very Bad";
+
+                String time = String.valueOf(LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm")));
+                String responseMessage = String.format(
+                        "\n========= Sleep report on %s ==========" +
+                        "\nSleep quality: %s" +
+                        "\nTotal of body movements during sleeping: %d" +
+                        "\n=====================================================\n",
+                        time, sleepQuality, totalMovements);
+
+
+                MovementsResponse response = MovementsResponse
+                        .newBuilder()
+                        .setTotalMovementsMessage(responseMessage)
+                        .build();
                 responseObserver.onNext(response);
                 responseObserver.onCompleted();
             }
         };
     }
 
+//    @Override
+//    public StreamObserver<HeartRateRequest> trackHeartRate(StreamObserver<HeartRateResponse> responseObserver) {
+//        return new StreamObserver<HeartRateRequest>() {
+//
+//            final int timingInSeconds = 60;
+//            int heartBeatCount = 0;
+//            double heartBeatPerMinute = 0;
+//
+//            @Override
+//            public void onNext(HeartRateRequest heartRateRequest) {
+//
+//                for (int i = 0; i < timingInSeconds; i++) {
+//                    heartBeatCount += heartRateRequest.getHeartBeatPerSecond();
+//                    try {
+//                        Thread.sleep(1000);
+//                    } catch (InterruptedException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                }
+//
+//                heartBeatPerMinute = heartBeatCount / timingInSeconds;
+//
+//                HeartRateResponse response = HeartRateResponse.newBuilder().setHeartRate(heartBeatPerMinute).build();
+//
+//                responseObserver.onNext(response);
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable throwable) {
+//
+//            }
+//
+//            @Override
+//            public void onCompleted() {
+//                String responseMessage = String.format("\nHeart rate: %d bpm", heartBeatPerMinute);
+//
+//                HeartRateResponse response = HeartRateResponse
+//                        .newBuilder()
+//                        .setHeartRate(heartBeatPerMinute)
+//                        .build();
+//                responseObserver.onNext(response);
+//                responseObserver.onCompleted();
+//
+//            }
+//        };
+//    }
 }

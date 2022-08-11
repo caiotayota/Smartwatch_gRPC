@@ -20,20 +20,20 @@ public final class SleepMonitoringImpl {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_sleepMonitoring_MovementRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_sleepMonitoring_TotalMovementsResponse_descriptor;
+    internal_static_sleepMonitoring_MovementsResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_sleepMonitoring_TotalMovementsResponse_fieldAccessorTable;
+      internal_static_sleepMonitoring_MovementsResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_sleepMonitoring_heartRateRequest_descriptor;
+    internal_static_sleepMonitoring_HeartRateRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_sleepMonitoring_heartRateRequest_fieldAccessorTable;
+      internal_static_sleepMonitoring_HeartRateRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_sleepMonitoring_heartRateResponse_descriptor;
+    internal_static_sleepMonitoring_HeartRateResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_sleepMonitoring_heartRateResponse_fieldAccessorTable;
+      internal_static_sleepMonitoring_HeartRateResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -44,18 +44,18 @@ public final class SleepMonitoringImpl {
   static {
     java.lang.String[] descriptorData = {
       "\n\025sleepMonitoring.proto\022\017sleepMonitoring" +
-      "\"#\n\017MovementRequest\022\020\n\010movement\030\001 \001(\010\"0\n" +
-      "\026TotalMovementsResponse\022\026\n\016totalMovement" +
-      "s\030\001 \001(\t\"6\n\020heartRateRequest\022\021\n\theartBeat" +
-      "\030\001 \001(\005\022\017\n\007seconds\030\002 \001(\005\"&\n\021heartRateResp" +
-      "onse\022\021\n\theartRate\030\001 \001(\t2\323\001\n\026SleepMonitor" +
-      "ingService\022\\\n\rtrackMovement\022 .sleepMonit" +
-      "oring.MovementRequest\032\'.sleepMonitoring." +
-      "TotalMovementsResponse(\001\022[\n\016trackHeartRa" +
-      "te\022!.sleepMonitoring.heartRateRequest\032\"." +
-      "sleepMonitoring.heartRateResponse(\0010\001BB\n" +
-      ")com.caiotayota.smartwatch.sleepMonitori" +
-      "ngB\023SleepMonitoringImplP\001b\006proto3"
+      "\"#\n\017MovementRequest\022\020\n\010movement\030\001 \001(\010\"2\n" +
+      "\021MovementsResponse\022\035\n\025totalMovementsMess" +
+      "age\030\001 \001(\t\".\n\020HeartRateRequest\022\032\n\022heartBe" +
+      "atPerSecond\030\001 \001(\001\"&\n\021HeartRateResponse\022\021" +
+      "\n\theartRate\030\001 \001(\0012\316\001\n\026SleepMonitoringSer" +
+      "vice\022W\n\rtrackMovement\022 .sleepMonitoring." +
+      "MovementRequest\032\".sleepMonitoring.Moveme" +
+      "ntsResponse(\001\022[\n\016trackHeartRate\022!.sleepM" +
+      "onitoring.HeartRateRequest\032\".sleepMonito" +
+      "ring.HeartRateResponse(\0010\001BB\n)com.caiota" +
+      "yota.smartwatch.sleepMonitoringB\023SleepMo" +
+      "nitoringImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -75,23 +75,23 @@ public final class SleepMonitoringImpl {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_sleepMonitoring_MovementRequest_descriptor,
         new java.lang.String[] { "Movement", });
-    internal_static_sleepMonitoring_TotalMovementsResponse_descriptor =
+    internal_static_sleepMonitoring_MovementsResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_sleepMonitoring_TotalMovementsResponse_fieldAccessorTable = new
+    internal_static_sleepMonitoring_MovementsResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_sleepMonitoring_TotalMovementsResponse_descriptor,
-        new java.lang.String[] { "TotalMovements", });
-    internal_static_sleepMonitoring_heartRateRequest_descriptor =
+        internal_static_sleepMonitoring_MovementsResponse_descriptor,
+        new java.lang.String[] { "TotalMovementsMessage", });
+    internal_static_sleepMonitoring_HeartRateRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_sleepMonitoring_heartRateRequest_fieldAccessorTable = new
+    internal_static_sleepMonitoring_HeartRateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_sleepMonitoring_heartRateRequest_descriptor,
-        new java.lang.String[] { "HeartBeat", "Seconds", });
-    internal_static_sleepMonitoring_heartRateResponse_descriptor =
+        internal_static_sleepMonitoring_HeartRateRequest_descriptor,
+        new java.lang.String[] { "HeartBeatPerSecond", });
+    internal_static_sleepMonitoring_HeartRateResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_sleepMonitoring_heartRateResponse_fieldAccessorTable = new
+    internal_static_sleepMonitoring_HeartRateResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_sleepMonitoring_heartRateResponse_descriptor,
+        internal_static_sleepMonitoring_HeartRateResponse_descriptor,
         new java.lang.String[] { "HeartRate", });
   }
 

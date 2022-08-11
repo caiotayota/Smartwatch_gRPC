@@ -37,26 +37,14 @@ public class SimpleServiceRegistration {
 
             jmdns.registerService(serviceInfo);
 
-            System.out.printf("registering service with type: %s and name: %s on port %d ", service_type, service_name, port);
+            System.out.printf("* Registering service with type: \"%s\" and name: \"%s\" on port: \"%d\" *", service_type, service_name, port);
 
-            //sleep for 10 seconds
-            Thread.sleep(10000);
-            System.out.println("\nService Registered");
-            //unregister the services
-            //jmdns.unregisterAllServices();   //you could also unregister a single service
+            Thread.sleep(10000); // sleep for 10 seconds
+            System.out.println("\n* Service Registered *");
 
-
-        } catch (UnknownHostException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
 }
