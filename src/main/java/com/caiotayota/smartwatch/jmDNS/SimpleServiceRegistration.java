@@ -7,18 +7,15 @@ import java.net.InetAddress;
 
 public class SimpleServiceRegistration {
 
-    public void run(int port, String service_type, String service_name) {
+    public void run(String service_type, String service_name, int port, String service_description) {
 
         try {
             JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
-            String service_desc = "test integration of jmDNS with gRPC";
-
-            ServiceInfo serviceInfo = ServiceInfo.create(service_type, service_name, port, service_desc);
+            ServiceInfo serviceInfo = ServiceInfo.create(service_type, service_name, port, service_description);
             jmdns.registerService(serviceInfo);
+            System.out.printf("... Registering service with type: \"%s\" and name: \"%s\" on port: \"%d\" ...", service_type, service_name, port);
 
-            System.out.printf("* Registering service with type: \"%s\" and name: \"%s\" on port: \"%d\" *", service_type, service_name, port);
-
-            Thread.sleep(5000); // sleep for 5 seconds
+            Thread.sleep(2000); // sleep for 3 seconds
             System.out.println("\n* Service Registered *");
 
         } catch (IOException | InterruptedException e) {

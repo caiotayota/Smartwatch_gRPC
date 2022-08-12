@@ -14,24 +14,20 @@ public class SimpleServiceDiscovery {
     private int port;
     private String host;
 
-    private static class MyServiceListener implements ServiceListener{
+    private static class MyServiceListener implements ServiceListener {
 
         private int port;
-        private String host;
         private ServiceInfo serviceInfo;
 
         public void serviceAdded(ServiceEvent event) {
-            // TODO Auto-generated method stub
             System.out.println("\nService Added " + event.getInfo());
         }
 
         public void serviceRemoved(ServiceEvent event) {
-            // TODO Auto-generated method stub
             System.out.println("Service Removed " + event.getInfo());
         }
 
         public void serviceResolved(ServiceEvent event) {
-            // TODO Auto-generated method stub
             System.out.println("Service Resolved " + event.getInfo());
 
             ServiceInfo serviceInfo = event.getInfo();
@@ -43,6 +39,7 @@ public class SimpleServiceDiscovery {
             System.out.println("name: " + serviceInfo.getName());
             System.out.println("computer name: " + serviceInfo.getServer());
             System.out.println("desc/properties: " + serviceInfo.getNiceTextString());
+            System.out.println();
         }
 
         public int getPort() {
@@ -73,11 +70,10 @@ public class SimpleServiceDiscovery {
             MyServiceListener msl = new MyServiceListener();
             jmdns.addServiceListener(service_type, msl);
 
-            Thread.sleep(10000);
+            Thread.sleep(2000);
 
             serviceInfo = msl.getServiceInfo();
             port = msl.getPort();
-            System.out.println("This is the port retrieved from jmDNS: " + port);
 
             jmdns.close();
 
