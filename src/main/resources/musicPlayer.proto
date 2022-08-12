@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.caiotayota.smartwatch.musicPlayer";
+option java_outer_classname = "MusicPlayerServiceImpl";
+
+package musicPlayer;
+
+service MusicPlayerService {
+
+  // Server streaming
+  rpc playMusic(MusicRequest) returns (stream MusicResponse);
+}
+
+message MusicRequest {
+  string request = 1;
+}
+
+message MusicResponse {
+  string musicResponse = 1;
+}
