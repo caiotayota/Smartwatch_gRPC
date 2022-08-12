@@ -62,38 +62,6 @@ public final class SleepMonitoringServiceGrpc {
      return getTrackMovementMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest,
-      com.caiotayota.smartwatch.sleepMonitoring.HeartRateResponse> getTrackHeartRateMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "trackHeartRate",
-      requestType = com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest.class,
-      responseType = com.caiotayota.smartwatch.sleepMonitoring.HeartRateResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-  public static io.grpc.MethodDescriptor<com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest,
-      com.caiotayota.smartwatch.sleepMonitoring.HeartRateResponse> getTrackHeartRateMethod() {
-    io.grpc.MethodDescriptor<com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest, com.caiotayota.smartwatch.sleepMonitoring.HeartRateResponse> getTrackHeartRateMethod;
-    if ((getTrackHeartRateMethod = SleepMonitoringServiceGrpc.getTrackHeartRateMethod) == null) {
-      synchronized (SleepMonitoringServiceGrpc.class) {
-        if ((getTrackHeartRateMethod = SleepMonitoringServiceGrpc.getTrackHeartRateMethod) == null) {
-          SleepMonitoringServiceGrpc.getTrackHeartRateMethod = getTrackHeartRateMethod = 
-              io.grpc.MethodDescriptor.<com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest, com.caiotayota.smartwatch.sleepMonitoring.HeartRateResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-              .setFullMethodName(generateFullMethodName(
-                  "sleepMonitoring.SleepMonitoringService", "trackHeartRate"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.caiotayota.smartwatch.sleepMonitoring.HeartRateResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new SleepMonitoringServiceMethodDescriptorSupplier("trackHeartRate"))
-                  .build();
-          }
-        }
-     }
-     return getTrackHeartRateMethod;
-  }
-
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -134,13 +102,6 @@ public final class SleepMonitoringServiceGrpc {
       return asyncUnimplementedStreamingCall(getTrackMovementMethod(), responseObserver);
     }
 
-    /**
-     */
-    public io.grpc.stub.StreamObserver<com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest> trackHeartRate(
-        io.grpc.stub.StreamObserver<com.caiotayota.smartwatch.sleepMonitoring.HeartRateResponse> responseObserver) {
-      return asyncUnimplementedStreamingCall(getTrackHeartRateMethod(), responseObserver);
-    }
-
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -150,13 +111,6 @@ public final class SleepMonitoringServiceGrpc {
                 com.caiotayota.smartwatch.sleepMonitoring.MovementRequest,
                 com.caiotayota.smartwatch.sleepMonitoring.MovementsResponse>(
                   this, METHODID_TRACK_MOVEMENT)))
-          .addMethod(
-            getTrackHeartRateMethod(),
-            asyncBidiStreamingCall(
-              new MethodHandlers<
-                com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest,
-                com.caiotayota.smartwatch.sleepMonitoring.HeartRateResponse>(
-                  this, METHODID_TRACK_HEART_RATE)))
           .build();
     }
   }
@@ -191,14 +145,6 @@ public final class SleepMonitoringServiceGrpc {
         io.grpc.stub.StreamObserver<com.caiotayota.smartwatch.sleepMonitoring.MovementsResponse> responseObserver) {
       return asyncClientStreamingCall(
           getChannel().newCall(getTrackMovementMethod(), getCallOptions()), responseObserver);
-    }
-
-    /**
-     */
-    public io.grpc.stub.StreamObserver<com.caiotayota.smartwatch.sleepMonitoring.HeartRateRequest> trackHeartRate(
-        io.grpc.stub.StreamObserver<com.caiotayota.smartwatch.sleepMonitoring.HeartRateResponse> responseObserver) {
-      return asyncBidiStreamingCall(
-          getChannel().newCall(getTrackHeartRateMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -247,7 +193,6 @@ public final class SleepMonitoringServiceGrpc {
   }
 
   private static final int METHODID_TRACK_MOVEMENT = 0;
-  private static final int METHODID_TRACK_HEART_RATE = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -279,9 +224,6 @@ public final class SleepMonitoringServiceGrpc {
         case METHODID_TRACK_MOVEMENT:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.trackMovement(
               (io.grpc.stub.StreamObserver<com.caiotayota.smartwatch.sleepMonitoring.MovementsResponse>) responseObserver);
-        case METHODID_TRACK_HEART_RATE:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.trackHeartRate(
-              (io.grpc.stub.StreamObserver<com.caiotayota.smartwatch.sleepMonitoring.HeartRateResponse>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -334,7 +276,6 @@ public final class SleepMonitoringServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new SleepMonitoringServiceFileDescriptorSupplier())
               .addMethod(getTrackMovementMethod())
-              .addMethod(getTrackHeartRateMethod())
               .build();
         }
       }

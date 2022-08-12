@@ -3,10 +3,13 @@ package com.caiotayota.smartwatch.sleepMonitoring;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import com.caiotayota.smartwatch.jmDNS.SimpleServiceDiscovery;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 import io.grpc.stub.StreamObserver;
+
+import javax.jmdns.ServiceInfo;
 
 public class SleepMonitoringClient {
     private static final Logger logger = Logger.getLogger(SleepMonitoringClient.class.getName());
@@ -14,6 +17,12 @@ public class SleepMonitoringClient {
     private static SleepMonitoringServiceGrpc.SleepMonitoringServiceStub asyncStub;
 
     public static void main(String[] args) {
+        SleepMonitoringClient sleepMonitoringClient = new SleepMonitoringClient();
+
+        String service_type = "_sleep-monitoring._tcp.local.";
+        SimpleServiceDiscovery.run(service_type);
+
+
         ManagedChannel channel = ManagedChannelBuilder
                 .forAddress("localhost", 50051)
                 .usePlaintext()

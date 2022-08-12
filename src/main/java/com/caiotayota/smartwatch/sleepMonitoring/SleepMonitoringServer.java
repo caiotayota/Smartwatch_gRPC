@@ -15,14 +15,15 @@ public class SleepMonitoringServer extends SleepMonitoringServiceGrpc.SleepMonit
     private static final Logger logger = Logger.getLogger(SleepMonitoringServer.class.getName());
 
     public static void main(String[] args) {
-
         SleepMonitoringServer sleepMonitoringServer = new SleepMonitoringServer();
 
+        String service_type = "_sleep-monitoring._tcp.local.";
+        String service_name = "SleepMonitoringServer";
         int port = 50051;
-        String service_type = "_grpc._tcp.local.";
-        String service_name = "GrpcServer";
+        String service_description = "Tracks body movements when sleeping";
+
         SimpleServiceRegistration ssr = new SimpleServiceRegistration();
-        ssr.run(port, service_type, service_name);
+        ssr.run(service_type, service_name, port, service_description);
 
         try {
             Server server = ServerBuilder.forPort(port)
