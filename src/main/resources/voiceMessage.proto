@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.caiotayota.smartwatch.voiceMessage";
+option java_outer_classname = "VoiceMessageServiceImpl";
+
+package voiceMessage;
+
+// Interface exported by the server.
+service VoiceMessageService {
+
+  // Bi-directional streaming
+  rpc sendVoiceMessage(stream VoiceMessageRequest) returns (stream VoiceMessageResponse) {}
+
+}
+
+message VoiceMessageRequest {
+  bytes voiceMessageToSend = 1;
+}
+
+message VoiceMessageResponse {
+  bytes voiceMessageReceived = 1;
+}
