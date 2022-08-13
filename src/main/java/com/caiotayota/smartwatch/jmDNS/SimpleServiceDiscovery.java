@@ -11,16 +11,13 @@ import javax.jmdns.ServiceListener;
 
 public class SimpleServiceDiscovery {
 
-    private int port;
-    private String host;
-
     private static class MyServiceListener implements ServiceListener {
 
         private int port;
         private ServiceInfo serviceInfo;
 
         public void serviceAdded(ServiceEvent event) {
-            System.out.println("\nService Added " + event.getInfo());
+            System.out.println("\nService Added " + event.getInfo() + "\n");
         }
 
         public void serviceRemoved(ServiceEvent event) {
@@ -61,8 +58,6 @@ public class SimpleServiceDiscovery {
     }
 
     public static ServiceInfo run(String service_type) {
-
-        int port = 0;
         ServiceInfo serviceInfo = null;
 
         try {
@@ -73,7 +68,6 @@ public class SimpleServiceDiscovery {
             Thread.sleep(2000);
 
             serviceInfo = msl.getServiceInfo();
-            port = msl.getPort();
 
             jmdns.close();
 
