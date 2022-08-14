@@ -11,9 +11,6 @@ service SleepMonitoringService {
 
   // Client streaming
   rpc trackMovement(stream MovementRequest) returns (MovementsResponse);
-
-//  rpc trackHeartRate(stream HeartRateRequest) returns (stream HeartRateResponse);
-
 }
 
 message MovementRequest {
@@ -24,9 +21,3 @@ message MovementsResponse {
   string totalMovementsMessage = 1;
 }
 
-//message HeartRateRequest {
-//  double heartBeatPerSecond = 1;
-//}
-//
-//message HeartRateResponse {
-//  string heartRateMessage = 1;
