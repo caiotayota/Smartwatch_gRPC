@@ -17,9 +17,10 @@ public class ControllerGUI implements ActionListener {
 
     private JTextField entry1, reply1;
     private JTextArea reply2;
-    private JTextField entry3, reply3;
+    private JTextField reply3;
     private JTextField entry4, reply4;
 
+    private boolean isMusicPlayerServerOn = false;
     private boolean isSwitchLightsServerOn = false;
 
 
@@ -137,34 +138,34 @@ public class ControllerGUI implements ActionListener {
         return panel;
 
     }
-//
-//    private JPanel getService4JPanel() {
-//
-//        JPanel panel = new JPanel();
-//
-//        BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
-//
-//        JLabel label = new JLabel("Enter value")	;
-//        panel.add(label);
-//        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-//        entry4 = new JTextField("",10);
-//        panel.add(entry4);
-//        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-//
-//        JButton button = new JButton("Invoke Service 4");
-//        button.addActionListener(this);
-//        panel.add(button);
-//        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-//
-//        reply4 = new JTextField("", 10);
-//        reply4 .setEditable(false);
-//        panel.add(reply4 );
-//
-//        panel.setLayout(boxlayout);
-//
-//        return panel;
-//
-//    }
+
+    private JPanel getService4JPanel() {
+
+        JPanel panel = new JPanel();
+
+        BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
+
+        JLabel label = new JLabel("Enter value")	;
+        panel.add(label);
+        panel.add(Box.createRigidArea(new Dimension(10, 0)));
+        entry4 = new JTextField("",10);
+        panel.add(entry4);
+        panel.add(Box.createRigidArea(new Dimension(10, 0)));
+
+        JButton button = new JButton("Invoke Service 4");
+        button.addActionListener(this);
+        panel.add(button);
+        panel.add(Box.createRigidArea(new Dimension(10, 0)));
+
+        reply4 = new JTextField("", 10);
+        reply4 .setEditable(false);
+        panel.add(reply4 );
+
+        panel.setLayout(boxlayout);
+
+        return panel;
+
+    }
     public static void main(String[] args) throws InterruptedException {
 
         ControllerGUI gui = new ControllerGUI();
@@ -226,37 +227,48 @@ public class ControllerGUI implements ActionListener {
         String label = button.getActionCommand();
 
         if (label.equals("Play Music")) {
-            System.out.println("... Connecting to the Music Server ...");
 
-            try {
+            if (!isMusicPlayerServerOn) {
+                System.out.println("... Connecting to the Music Server ...");
 
-                Thread musicPlayerServerThread = new Thread() {
-                    @Override
-                    public void run() {
-                        MusicPlayerServer.main(new String[]{});
-                    }
-                };
+                try {
 
-                Thread musicPlayerClientThread = new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            reply1.setText("Playing playlist...");
-                            MusicPlayerClient.main(new String[]{entry1.getText()});
-                        } catch (Exception ex) {
-                            throw new RuntimeException(ex);
+                    Thread musicPlayerServerThread = new Thread() {
+                        @Override
+                        public void run() {
+                            MusicPlayerServer.main(new String[]{});
                         }
-                    }
-                };
+                    };
 
-                musicPlayerServerThread.start();
-                Thread.sleep(8000);
-                musicPlayerClientThread.start();
+                    Thread musicPlayerClientThread = new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                reply1.setText("Playing playlist...");
+                                MusicPlayerClient.main(new String[]{entry1.getText()});
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    };
+
+                    musicPlayerServerThread.start();
+                    Thread.sleep(8000);
+                    musicPlayerClientThread.start();
 
 
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                isMusicPlayerServerOn = true;
+            } else {
+                MusicPlayerClient.playMusic(entry1.getText());
             }
+
+
+
+
         } else if (label.equals("Start tracking")) {
             System.out.println("... Connecting to the Sleeping Monitoring Server ...");
 

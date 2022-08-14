@@ -17,10 +17,11 @@ public class MusicPlayerClient {
 
     private static MusicPlayerServiceBlockingStub blockingStub;
     private static MusicPlayerServiceStub asyncStub;
+    static MusicPlayerClient musicPlayerClient = new MusicPlayerClient();
 
     public static void main(String[] args) throws Exception {
 
-        MusicPlayerClient musicPlayerClient = new MusicPlayerClient();
+
 
         String service_type = "_music-player._tcp.local.";
         SimpleServiceDiscovery.run(service_type);
@@ -34,7 +35,7 @@ public class MusicPlayerClient {
         asyncStub = MusicPlayerServiceGrpc.newStub(channel);
 
         playMusic(args[0]);
-        channel.shutdown();
+//        channel.shutdown();
     }
 
     public static void playMusic(String request) {
