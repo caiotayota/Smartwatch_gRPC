@@ -33,12 +33,12 @@ public class MusicPlayerClient {
         blockingStub = MusicPlayerServiceGrpc.newBlockingStub(channel);
         asyncStub = MusicPlayerServiceGrpc.newStub(channel);
 
-        playMusic();
+        playMusic(args[0]);
         channel.shutdown();
     }
 
-    public static void playMusic() {
-        MusicRequest musicRequest = MusicRequest.newBuilder().setRequest("Music 1, Music 2, Music 3, Music 4").build();
+    public static void playMusic(String request) {
+        MusicRequest musicRequest = MusicRequest.newBuilder().setRequest(request).build();
 
         try {
             Iterator<MusicResponse> responses = blockingStub.playMusic(musicRequest);

@@ -8,15 +8,7 @@ public interface VoiceMessageRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>repeated bytes voiceMessageToSend = 1;</code>
+   * <code>bytes voiceMessageToSend = 1;</code>
    */
-  java.util.List<com.google.protobuf.ByteString> getVoiceMessageToSendList();
-  /**
-   * <code>repeated bytes voiceMessageToSend = 1;</code>
-   */
-  int getVoiceMessageToSendCount();
-  /**
-   * <code>repeated bytes voiceMessageToSend = 1;</code>
-   */
-  com.google.protobuf.ByteString getVoiceMessageToSend(int index);
+  com.google.protobuf.ByteString getVoiceMessageToSend();
 }

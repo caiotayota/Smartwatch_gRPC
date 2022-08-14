@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 public class SleepMonitoringServer extends SleepMonitoringServiceGrpc.SleepMonitoringServiceImplBase {
 
     private static final Logger logger = Logger.getLogger(SleepMonitoringServer.class.getName());
+    public static String response;
 
     public static void main(String[] args) {
         SleepMonitoringServer sleepMonitoringServer = new SleepMonitoringServer();
@@ -77,6 +78,7 @@ public class SleepMonitoringServer extends SleepMonitoringServiceGrpc.SleepMonit
                         "\n=====================================================\n",
                         time, sleepQuality, totalMovements);
 
+                response = responseMessage;
 
                 MovementsResponse response = MovementsResponse
                         .newBuilder()
@@ -87,52 +89,4 @@ public class SleepMonitoringServer extends SleepMonitoringServiceGrpc.SleepMonit
             }
         };
     }
-
-//    @Override
-//    public StreamObserver<HeartRateRequest> trackHeartRate(StreamObserver<HeartRateResponse> responseObserver) {
-//        return new StreamObserver<HeartRateRequest>() {
-//
-//            final int timingInSeconds = 60;
-//            int heartBeatCount = 0;
-//            double heartBeatPerMinute = 0;
-//
-//            @Override
-//            public void onNext(HeartRateRequest heartRateRequest) {
-//
-//                for (int i = 0; i < timingInSeconds; i++) {
-//                    heartBeatCount += heartRateRequest.getHeartBeatPerSecond();
-//                    try {
-//                        Thread.sleep(1000);
-//                    } catch (InterruptedException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                }
-//
-//                heartBeatPerMinute = heartBeatCount / timingInSeconds;
-//
-//                HeartRateResponse response = HeartRateResponse.newBuilder().setHeartRate(heartBeatPerMinute).build();
-//
-//                responseObserver.onNext(response);
-//
-//            }
-//
-//            @Override
-//            public void onError(Throwable throwable) {
-//
-//            }
-//
-//            @Override
-//            public void onCompleted() {
-//                String responseMessage = String.format("\nHeart rate: %d bpm", heartBeatPerMinute);
-//
-//                HeartRateResponse response = HeartRateResponse
-//                        .newBuilder()
-//                        .setHeartRate(heartBeatPerMinute)
-//                        .build();
-//                responseObserver.onNext(response);
-//                responseObserver.onCompleted();
-//
-//            }
-//        };
-//    }
 }

@@ -35,8 +35,8 @@ public final class VoiceMessageServiceImpl {
     java.lang.String[] descriptorData = {
       "\n\022voiceMessage.proto\022\014voiceMessage\"1\n\023Vo" +
       "iceMessageRequest\022\032\n\022voiceMessageToSend\030" +
-      "\001 \003(\014\"4\n\024VoiceMessageResponse\022\034\n\024voiceMe" +
-      "ssageReceived\030\001 \003(\0142v\n\023VoiceMessageServi" +
+      "\001 \001(\014\"4\n\024VoiceMessageResponse\022\034\n\024voiceMe" +
+      "ssageReceived\030\001 \001(\0142v\n\023VoiceMessageServi" +
       "ce\022_\n\020sendVoiceMessage\022!.voiceMessage.Vo" +
       "iceMessageRequest\032\".voiceMessage.VoiceMe" +
       "ssageResponse\"\000(\0010\001BC\n&com.caiotayota.sm" +

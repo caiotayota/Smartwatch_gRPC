@@ -65,7 +65,7 @@ public class SimpleServiceDiscovery {
             MyServiceListener msl = new MyServiceListener();
             jmdns.addServiceListener(service_type, msl);
 
-            Thread.sleep(2000);
+            Thread.sleep(500);
 
             serviceInfo = msl.getServiceInfo();
 

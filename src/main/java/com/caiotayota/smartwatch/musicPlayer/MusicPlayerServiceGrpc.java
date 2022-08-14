@@ -16,9 +16,6 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
- * <pre>
- * Interface exported by the server.
- * </pre>
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.15.0)",
@@ -86,9 +83,6 @@ public final class MusicPlayerServiceGrpc {
   }
 
   /**
-   * <pre>
-   * Interface exported by the server.
-   * </pre>
    */
   public static abstract class MusicPlayerServiceImplBase implements io.grpc.BindableService {
 
@@ -116,9 +110,6 @@ public final class MusicPlayerServiceGrpc {
   }
 
   /**
-   * <pre>
-   * Interface exported by the server.
-   * </pre>
    */
   public static final class MusicPlayerServiceStub extends io.grpc.stub.AbstractStub<MusicPlayerServiceStub> {
     private MusicPlayerServiceStub(io.grpc.Channel channel) {
@@ -149,9 +140,6 @@ public final class MusicPlayerServiceGrpc {
   }
 
   /**
-   * <pre>
-   * Interface exported by the server.
-   * </pre>
    */
   public static final class MusicPlayerServiceBlockingStub extends io.grpc.stub.AbstractStub<MusicPlayerServiceBlockingStub> {
     private MusicPlayerServiceBlockingStub(io.grpc.Channel channel) {
@@ -182,9 +170,6 @@ public final class MusicPlayerServiceGrpc {
   }
 
   /**
-   * <pre>
-   * Interface exported by the server.
-   * </pre>
    */
   public static final class MusicPlayerServiceFutureStub extends io.grpc.stub.AbstractStub<MusicPlayerServiceFutureStub> {
     private MusicPlayerServiceFutureStub(io.grpc.Channel channel) {

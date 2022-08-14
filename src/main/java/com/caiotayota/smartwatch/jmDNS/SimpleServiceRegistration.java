@@ -15,7 +15,7 @@ public class SimpleServiceRegistration {
             jmdns.registerService(serviceInfo);
             System.out.printf("... Registering service with type: \"%s\" and name: \"%s\" on port: \"%d\" ...", service_type, service_name, port);
 
-            Thread.sleep(2000); // sleep for 2 seconds
+            Thread.sleep(500); // sleep for 2 seconds
             System.out.println("\n* Service Registered *");
 
         } catch (IOException | InterruptedException e) {

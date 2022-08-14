@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private VoiceMessageResponse() {
-    voiceMessageReceived_ = java.util.Collections.emptyList();
+    voiceMessageReceived_ = com.google.protobuf.ByteString.EMPTY;
   }
 
   @java.lang.Override
@@ -44,11 +44,8 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 10: {
-            if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-              voiceMessageReceived_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
-              mutable_bitField0_ |= 0x00000001;
-            }
-            voiceMessageReceived_.add(input.readBytes());
+
+            voiceMessageReceived_ = input.readBytes();
             break;
           }
           default: {
@@ -66,9 +63,6 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-        voiceMessageReceived_ = java.util.Collections.unmodifiableList(voiceMessageReceived_);
-      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -87,25 +81,12 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int VOICEMESSAGERECEIVED_FIELD_NUMBER = 1;
-  private java.util.List<com.google.protobuf.ByteString> voiceMessageReceived_;
+  private com.google.protobuf.ByteString voiceMessageReceived_;
   /**
-   * <code>repeated bytes voiceMessageReceived = 1;</code>
+   * <code>bytes voiceMessageReceived = 1;</code>
    */
-  public java.util.List<com.google.protobuf.ByteString>
-      getVoiceMessageReceivedList() {
+  public com.google.protobuf.ByteString getVoiceMessageReceived() {
     return voiceMessageReceived_;
-  }
-  /**
-   * <code>repeated bytes voiceMessageReceived = 1;</code>
-   */
-  public int getVoiceMessageReceivedCount() {
-    return voiceMessageReceived_.size();
-  }
-  /**
-   * <code>repeated bytes voiceMessageReceived = 1;</code>
-   */
-  public com.google.protobuf.ByteString getVoiceMessageReceived(int index) {
-    return voiceMessageReceived_.get(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -122,8 +103,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    for (int i = 0; i < voiceMessageReceived_.size(); i++) {
-      output.writeBytes(1, voiceMessageReceived_.get(i));
+    if (!voiceMessageReceived_.isEmpty()) {
+      output.writeBytes(1, voiceMessageReceived_);
     }
     unknownFields.writeTo(output);
   }
@@ -134,14 +115,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    {
-      int dataSize = 0;
-      for (int i = 0; i < voiceMessageReceived_.size(); i++) {
-        dataSize += com.google.protobuf.CodedOutputStream
-          .computeBytesSizeNoTag(voiceMessageReceived_.get(i));
-      }
-      size += dataSize;
-      size += 1 * getVoiceMessageReceivedList().size();
+    if (!voiceMessageReceived_.isEmpty()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBytesSize(1, voiceMessageReceived_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -159,8 +135,8 @@ private static final long serialVersionUID = 0L;
     com.caiotayota.smartwatch.voiceMessage.VoiceMessageResponse other = (com.caiotayota.smartwatch.voiceMessage.VoiceMessageResponse) obj;
 
     boolean result = true;
-    result = result && getVoiceMessageReceivedList()
-        .equals(other.getVoiceMessageReceivedList());
+    result = result && getVoiceMessageReceived()
+        .equals(other.getVoiceMessageReceived());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -172,10 +148,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (getVoiceMessageReceivedCount() > 0) {
-      hash = (37 * hash) + VOICEMESSAGERECEIVED_FIELD_NUMBER;
-      hash = (53 * hash) + getVoiceMessageReceivedList().hashCode();
-    }
+    hash = (37 * hash) + VOICEMESSAGERECEIVED_FIELD_NUMBER;
+    hash = (53 * hash) + getVoiceMessageReceived().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -309,8 +283,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      voiceMessageReceived_ = java.util.Collections.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000001);
+      voiceMessageReceived_ = com.google.protobuf.ByteString.EMPTY;
+
       return this;
     }
 
@@ -337,11 +311,6 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.caiotayota.smartwatch.voiceMessage.VoiceMessageResponse buildPartial() {
       com.caiotayota.smartwatch.voiceMessage.VoiceMessageResponse result = new com.caiotayota.smartwatch.voiceMessage.VoiceMessageResponse(this);
-      int from_bitField0_ = bitField0_;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        voiceMessageReceived_ = java.util.Collections.unmodifiableList(voiceMessageReceived_);
-        bitField0_ = (bitField0_ & ~0x00000001);
-      }
       result.voiceMessageReceived_ = voiceMessageReceived_;
       onBuilt();
       return result;
@@ -391,15 +360,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.caiotayota.smartwatch.voiceMessage.VoiceMessageResponse other) {
       if (other == com.caiotayota.smartwatch.voiceMessage.VoiceMessageResponse.getDefaultInstance()) return this;
-      if (!other.voiceMessageReceived_.isEmpty()) {
-        if (voiceMessageReceived_.isEmpty()) {
-          voiceMessageReceived_ = other.voiceMessageReceived_;
-          bitField0_ = (bitField0_ & ~0x00000001);
-        } else {
-          ensureVoiceMessageReceivedIsMutable();
-          voiceMessageReceived_.addAll(other.voiceMessageReceived_);
-        }
-        onChanged();
+      if (other.getVoiceMessageReceived() != com.google.protobuf.ByteString.EMPTY) {
+        setVoiceMessageReceived(other.getVoiceMessageReceived());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -429,76 +391,32 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
-    private int bitField0_;
 
-    private java.util.List<com.google.protobuf.ByteString> voiceMessageReceived_ = java.util.Collections.emptyList();
-    private void ensureVoiceMessageReceivedIsMutable() {
-      if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-        voiceMessageReceived_ = new java.util.ArrayList<com.google.protobuf.ByteString>(voiceMessageReceived_);
-        bitField0_ |= 0x00000001;
-       }
+    private com.google.protobuf.ByteString voiceMessageReceived_ = com.google.protobuf.ByteString.EMPTY;
+    /**
+     * <code>bytes voiceMessageReceived = 1;</code>
+     */
+    public com.google.protobuf.ByteString getVoiceMessageReceived() {
+      return voiceMessageReceived_;
     }
     /**
-     * <code>repeated bytes voiceMessageReceived = 1;</code>
+     * <code>bytes voiceMessageReceived = 1;</code>
      */
-    public java.util.List<com.google.protobuf.ByteString>
-        getVoiceMessageReceivedList() {
-      return java.util.Collections.unmodifiableList(voiceMessageReceived_);
-    }
-    /**
-     * <code>repeated bytes voiceMessageReceived = 1;</code>
-     */
-    public int getVoiceMessageReceivedCount() {
-      return voiceMessageReceived_.size();
-    }
-    /**
-     * <code>repeated bytes voiceMessageReceived = 1;</code>
-     */
-    public com.google.protobuf.ByteString getVoiceMessageReceived(int index) {
-      return voiceMessageReceived_.get(index);
-    }
-    /**
-     * <code>repeated bytes voiceMessageReceived = 1;</code>
-     */
-    public Builder setVoiceMessageReceived(
-        int index, com.google.protobuf.ByteString value) {
+    public Builder setVoiceMessageReceived(com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  ensureVoiceMessageReceivedIsMutable();
-      voiceMessageReceived_.set(index, value);
+  
+      voiceMessageReceived_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>repeated bytes voiceMessageReceived = 1;</code>
-     */
-    public Builder addVoiceMessageReceived(com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureVoiceMessageReceivedIsMutable();
-      voiceMessageReceived_.add(value);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>repeated bytes voiceMessageReceived = 1;</code>
-     */
-    public Builder addAllVoiceMessageReceived(
-        java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
-      ensureVoiceMessageReceivedIsMutable();
-      com.google.protobuf.AbstractMessageLite.Builder.addAll(
-          values, voiceMessageReceived_);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>repeated bytes voiceMessageReceived = 1;</code>
+     * <code>bytes voiceMessageReceived = 1;</code>
      */
     public Builder clearVoiceMessageReceived() {
-      voiceMessageReceived_ = java.util.Collections.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000001);
+      
+      voiceMessageReceived_ = getDefaultInstance().getVoiceMessageReceived();
       onChanged();
       return this;
     }

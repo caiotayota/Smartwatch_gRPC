@@ -80,7 +80,7 @@ public class VoiceMessageClient {
             String firstMessage = "Hi There, my Name is Caio!";
 
             ByteString messageToSend = ByteString.copyFrom(firstMessage, StandardCharsets.UTF_8);
-            requestObserver.onNext(VoiceMessageRequest.newBuilder().addVoiceMessageToSend(messageToSend).build());
+            requestObserver.onNext(VoiceMessageRequest.newBuilder().setVoiceMessageToSend(messageToSend).build());
 
             String time = String.valueOf(LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm")));
             System.out.println("[" + time + "] Client: " + firstMessage);

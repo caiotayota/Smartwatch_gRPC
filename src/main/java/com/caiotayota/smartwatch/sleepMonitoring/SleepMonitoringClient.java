@@ -1,15 +1,11 @@
 package com.caiotayota.smartwatch.sleepMonitoring;
 
-import java.util.Random;
-import java.util.logging.Logger;
-
 import com.caiotayota.smartwatch.jmDNS.SimpleServiceDiscovery;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-
 import io.grpc.stub.StreamObserver;
 
-import javax.jmdns.ServiceInfo;
+import java.util.logging.Logger;
 
 public class SleepMonitoringClient {
     private static final Logger logger = Logger.getLogger(SleepMonitoringClient.class.getName());
@@ -78,45 +74,10 @@ public class SleepMonitoringClient {
             }
 
             requestStreamObserver.onCompleted();
-            Thread.sleep(new Random().nextInt(1000) + 500);
+            Thread.sleep(500);
 
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
-
-//    public static void trackHeartBeat () {
-//
-//        logger.info("Sensor activated: Tracking Heart beats...");
-//
-//        StreamObserver<HeartRateResponse> responseStreamObserver = new StreamObserver<HeartRateResponse>() {
-//            @Override
-//            public void onNext(HeartRateResponse heartRateResponse) {
-//                heartRateResponse.getHeartRate();
-//                System.out.println("Heart Rate: " + heartRateResponse.getHeartRate());
-//            }
-//
-//            @Override
-//            public void onError(Throwable throwable) {
-//
-//            }
-//
-//            @Override
-//            public void onCompleted() {
-//
-//            }
-//
-//        };
-//
-//        StreamObserver<HeartRateRequest> requestStreamObserver = asyncStub.trackHeartRate(responseStreamObserver);
-//        double a = Math.random()*(3 + 1);
-//        try {
-//            requestStreamObserver.onNext(HeartRateRequest.newBuilder().setHeartBeatPerSecond(a).build());
-//            requestStreamObserver.onCompleted();
-//            Thread.sleep(new Random().nextInt(1000) + 500);
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//    }
 }

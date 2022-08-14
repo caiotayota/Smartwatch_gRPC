@@ -8,15 +8,7 @@ public interface VoiceMessageResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>repeated bytes voiceMessageReceived = 1;</code>
+   * <code>bytes voiceMessageReceived = 1;</code>
    */
-  java.util.List<com.google.protobuf.ByteString> getVoiceMessageReceivedList();
-  /**
-   * <code>repeated bytes voiceMessageReceived = 1;</code>
-   */
-  int getVoiceMessageReceivedCount();
-  /**
-   * <code>repeated bytes voiceMessageReceived = 1;</code>
-   */
-  com.google.protobuf.ByteString getVoiceMessageReceived(int index);
+  com.google.protobuf.ByteString getVoiceMessageReceived();
 }

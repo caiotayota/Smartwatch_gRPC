@@ -54,7 +54,7 @@ public class VoiceMessageServer extends VoiceMessageServiceImplBase {
 
                 String secondMessage = "Hi Caio, nice to meet you! My name is Bruna.";
                 ByteString replay = ByteString.copyFrom(secondMessage, StandardCharsets.UTF_8);
-                VoiceMessageResponse reply = VoiceMessageResponse.newBuilder().addVoiceMessageReceived(replay).build();
+                VoiceMessageResponse reply = VoiceMessageResponse.newBuilder().setVoiceMessageReceived(replay).build();
 
                 responseObserver.onNext(reply);
                 time = String.valueOf(LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm")));
