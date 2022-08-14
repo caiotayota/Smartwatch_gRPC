@@ -11,9 +11,9 @@ public class SleepMonitoringClient {
     private static final Logger logger = Logger.getLogger(SleepMonitoringClient.class.getName());
     private static SleepMonitoringServiceGrpc.SleepMonitoringServiceBlockingStub blockingStub;
     private static SleepMonitoringServiceGrpc.SleepMonitoringServiceStub asyncStub;
+    static SleepMonitoringClient sleepMonitoringClient = new SleepMonitoringClient();
 
     public static void main(String[] args) {
-        SleepMonitoringClient sleepMonitoringClient = new SleepMonitoringClient();
 
         String service_type = "_sleep-monitoring._tcp.local.";
         SimpleServiceDiscovery.run(service_type);
@@ -28,8 +28,7 @@ public class SleepMonitoringClient {
         asyncStub = SleepMonitoringServiceGrpc.newStub(channel);
 
         trackMovement();
-//        trackHeartBeat();
-        channel.shutdown();
+//        channel.shutdown();
     }
 
     public static void trackMovement() {

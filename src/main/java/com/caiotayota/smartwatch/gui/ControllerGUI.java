@@ -21,6 +21,7 @@ public class ControllerGUI implements ActionListener {
     private JTextField entry4, reply4;
 
     private boolean isMusicPlayerServerOn = false;
+    private boolean isSleepingMonitoringServerOn = false;
     private boolean isSwitchLightsServerOn = false;
 
 
@@ -266,40 +267,45 @@ public class ControllerGUI implements ActionListener {
                 MusicPlayerClient.playMusic(entry1.getText());
             }
 
-
-
-
         } else if (label.equals("Start tracking")) {
-            System.out.println("... Connecting to the Sleeping Monitoring Server ...");
 
-            try {
+            if (!isSleepingMonitoringServerOn) {
+                System.out.println("... Connecting to the Sleeping Monitoring Server ...");
 
-                Thread sleepMonitoringServerThread = new Thread() {
-                    @Override
-                    public void run() {
-                        SleepMonitoringServer.main(new String[]{});
-                    }
-                };
+                try {
 
-                Thread sleepMonitoringClientThread = new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            SleepMonitoringClient.main(new String[]{});
-                            reply2.setText(SleepMonitoringServer.response);
-                        } catch (Exception ex) {
-                            throw new RuntimeException(ex);
+                    Thread sleepMonitoringServerThread = new Thread() {
+                        @Override
+                        public void run() {
+                            SleepMonitoringServer.main(new String[]{});
                         }
-                    }
-                };
+                    };
 
-                sleepMonitoringServerThread.start();
-                Thread.sleep(8000);
-                sleepMonitoringClientThread.start();
+                    Thread sleepMonitoringClientThread = new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                SleepMonitoringClient.main(new String[]{});
+                                reply2.setText(SleepMonitoringServer.response);
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    };
+
+                    sleepMonitoringServerThread.start();
+                    Thread.sleep(8000);
+                    sleepMonitoringClientThread.start();
 
 
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+                isSleepingMonitoringServerOn = true;
+            } else {
+                SleepMonitoringClient.trackMovement();
+                reply2.setText(SleepMonitoringServer.response);
+
             }
 
 
@@ -338,45 +344,9 @@ public class ControllerGUI implements ActionListener {
                 reply3.setText(SwitchLightsServer.response);
 
             }
-
 
         } else if (label.equals("Kitchen")) {
 
-        if (!isSwitchLightsServerOn) {
-            try {
-                Thread switchLightsServerThread = new Thread() {
-                    @Override
-                    public void run() {
-                        SwitchLightsServer.main(new String[]{});
-                    }
-                };
-                switchLightsServerThread.start();
-                isSwitchLightsServerOn = true;
-                Thread switchLightsClientThread = new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            SwitchLightsClient.main(new String[]{});
-                            reply3.setText(SwitchLightsServer.response);
-                        } catch (Exception ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    }
-                };
-                switchLightsClientThread.start();
-
-
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-        } else {
-
-            SwitchLightsClient.switchLight();
-            reply3.setText(SwitchLightsServer.response);
-
-        }
-        } else if (label.equals("Living Room")) {
-
             if (!isSwitchLightsServerOn) {
                 try {
                     Thread switchLightsServerThread = new Thread() {
@@ -410,7 +380,6 @@ public class ControllerGUI implements ActionListener {
                 reply3.setText(SwitchLightsServer.response);
 
             }
-
 
         } else if (label.equals("Bedroom 1")) {
 
