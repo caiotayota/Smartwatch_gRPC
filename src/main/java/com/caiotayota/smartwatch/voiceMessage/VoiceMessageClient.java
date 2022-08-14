@@ -9,17 +9,15 @@ import io.grpc.stub.StreamObserver;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 import java.util.logging.Logger;
 
 public class VoiceMessageClient {
     private static final Logger logger = Logger.getLogger(VoiceMessageClient.class.getName());
     private static VoiceMessageServiceGrpc.VoiceMessageServiceBlockingStub blockingStub;
     private static VoiceMessageServiceGrpc.VoiceMessageServiceStub asyncStub;
+    static VoiceMessageClient voiceMessageClient = new VoiceMessageClient();
 
     public static void main(String[] args) throws Exception {
-
-        VoiceMessageClient voiceMessageClient = new VoiceMessageClient();
 
         String service_type = "_voice-message._tcp.local.";
         SimpleServiceDiscovery.run(service_type);
@@ -35,7 +33,7 @@ public class VoiceMessageClient {
         sendVoiceMessage();
 
         // Closing the channel once message has been passed.
-        channel.shutdown();
+//        channel.shutdown();
 
     }
 
@@ -91,16 +89,12 @@ public class VoiceMessageClient {
 
 
             // Sleep for a bit before sending the next one.
-            Thread.sleep(2000);
+            Thread.sleep(1000);
 
 
         } catch (RuntimeException | InterruptedException e) {
             e.printStackTrace();
         }
-
-
     }
-
-
 }
 

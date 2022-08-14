@@ -6,24 +6,26 @@ import com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringClient;
 import com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringServer;
 import com.caiotayota.smartwatch.switchLights.SwitchLightsClient;
 import com.caiotayota.smartwatch.switchLights.SwitchLightsServer;
+import com.caiotayota.smartwatch.voiceMessage.VoiceMessageClient;
+import com.caiotayota.smartwatch.voiceMessage.VoiceMessageServer;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ControllerGUI implements ActionListener {
 
     private JTextField entry1, reply1;
     private JTextArea reply2;
     private JTextField reply3;
-    private JTextField entry4, reply4;
 
     private boolean isMusicPlayerServerOn = false;
     private boolean isSleepingMonitoringServerOn = false;
     private boolean isSwitchLightsServerOn = false;
-
+    private boolean isVoiceMessageServerOn = false;
 
     private JPanel getService1JPanel() throws InterruptedException {
 
@@ -52,7 +54,7 @@ public class ControllerGUI implements ActionListener {
         panel.add(label2);
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        entry1 = new JTextField("",10);
+        entry1 = new JTextField("", 10);
 
         panel.add(entry1);
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -63,7 +65,7 @@ public class ControllerGUI implements ActionListener {
         panel.add(button);
 
 
-        reply1 = new JTextField("",10);
+        reply1 = new JTextField("", 10);
         reply1.setEditable(false);
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(reply1);
@@ -85,7 +87,7 @@ public class ControllerGUI implements ActionListener {
         panel.add(button);
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        reply2 = new JTextArea("",10,50);
+        reply2 = new JTextArea("", 10, 50);
         reply2.setEditable(false);
 
         panel.add(reply2);
@@ -131,7 +133,7 @@ public class ControllerGUI implements ActionListener {
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
         reply3 = new JTextField("", 10);
-        reply3 .setEditable(false);
+        reply3.setEditable(false);
         panel.add(reply3);
 
         panel.setLayout(boxlayout);
@@ -144,29 +146,23 @@ public class ControllerGUI implements ActionListener {
 
         JPanel panel = new JPanel();
 
-        BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
+        BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 
-        JLabel label = new JLabel("Enter value")	;
+        JLabel label = new JLabel("Hold the button to record and send a voice message:");
         panel.add(label);
-        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-        entry4 = new JTextField("",10);
-        panel.add(entry4);
-        panel.add(Box.createRigidArea(new Dimension(10, 0)));
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        JButton button = new JButton("Invoke Service 4");
+        JButton button = new JButton("Send Voice Message");
         button.addActionListener(this);
         panel.add(button);
-        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-
-        reply4 = new JTextField("", 10);
-        reply4 .setEditable(false);
-        panel.add(reply4 );
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
         panel.setLayout(boxlayout);
 
         return panel;
 
     }
+
     public static void main(String[] args) throws InterruptedException {
 
         ControllerGUI gui = new ControllerGUI();
@@ -203,16 +199,15 @@ public class ControllerGUI implements ActionListener {
         tp1.setBounds(50, 50, 200, 200);
         tp1.add("Switch Lights", panel3);
 
-//        JPanel panel4 = new JPanel();
-//        panel4.setBorder(new EmptyBorder(new Insets(50, 100, 50, 100)));
-//        panel4.add(getService1JPanel());
-//
-//        JTabbedPane tp4 = new JTabbedPane();
-//        tp1.setBounds(50, 50, 200, 200);
-//        tp1.add("Voice Chat", panel4);
+        JPanel panel4 = new JPanel();
+        panel4.setBorder(new EmptyBorder(new Insets(50, 100, 50, 100)));
+        panel4.add(getService4JPanel());
+
+        JTabbedPane tp4 = new JTabbedPane();
+        tp1.setBounds(50, 50, 200, 200);
+        tp1.add("Voice Chat", panel4);
 
         frame.setSize(300, 300);
-
 
 
         // Set the window to be visible as the default to be false
@@ -224,7 +219,7 @@ public class ControllerGUI implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton button = (JButton)e.getSource();
+        JButton button = (JButton) e.getSource();
         String label = button.getActionCommand();
 
         if (label.equals("Play Music")) {
@@ -383,42 +378,42 @@ public class ControllerGUI implements ActionListener {
 
         } else if (label.equals("Bedroom 1")) {
 
-        if (!isSwitchLightsServerOn) {
-            try {
-                Thread switchLightsServerThread = new Thread() {
-                    @Override
-                    public void run() {
-                        SwitchLightsServer.main(new String[]{});
-                    }
-                };
-                switchLightsServerThread.start();
-                isSwitchLightsServerOn = true;
-                Thread switchLightsClientThread = new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            SwitchLightsClient.main(new String[]{});
-                            reply3.setText(SwitchLightsServer.response);
-                        } catch (Exception ex) {
-                            throw new RuntimeException(ex);
+            if (!isSwitchLightsServerOn) {
+                try {
+                    Thread switchLightsServerThread = new Thread() {
+                        @Override
+                        public void run() {
+                            SwitchLightsServer.main(new String[]{});
                         }
-                    }
-                };
-                switchLightsClientThread.start();
+                    };
+                    switchLightsServerThread.start();
+                    isSwitchLightsServerOn = true;
+                    Thread switchLightsClientThread = new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                SwitchLightsClient.main(new String[]{});
+                                reply3.setText(SwitchLightsServer.response);
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    };
+                    switchLightsClientThread.start();
 
 
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else {
+
+                SwitchLightsClient.switchLight();
+                reply3.setText(SwitchLightsServer.response);
+
             }
-        } else {
-
-            SwitchLightsClient.switchLight();
-            reply3.setText(SwitchLightsServer.response);
-
-        }
 
 
-    } else if (label.equals("Outside")) {
+        } else if (label.equals("Outside")) {
 
             if (!isSwitchLightsServerOn) {
                 try {
@@ -451,6 +446,44 @@ public class ControllerGUI implements ActionListener {
 
                 SwitchLightsClient.switchLight();
                 reply3.setText(SwitchLightsServer.response);
+
+            }
+        } else if (label.equals("Send Voice Message")) {
+
+            if (!isVoiceMessageServerOn) {
+                try {
+                    Thread voiceMessageServerThread = new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                VoiceMessageServer.main(new String[]{});
+                            } catch (IOException | InterruptedException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    };
+                    voiceMessageServerThread.start();
+                    isVoiceMessageServerOn = true;
+
+                    Thread voiceMessageClientThread = new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                VoiceMessageClient.main(new String[]{});
+
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    };
+                    voiceMessageClientThread.start();
+
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else {
+
+                VoiceMessageClient.sendVoiceMessage();
 
             }
         }
