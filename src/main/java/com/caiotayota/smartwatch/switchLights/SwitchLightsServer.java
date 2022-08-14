@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 public class SwitchLightsServer extends SwitchLightsServiceImplBase {
 
     private static final Logger logger = Logger.getLogger(SwitchLightsServer.class.getName());
+    public static String response;
 
     public static void main(String[] args) {
         SwitchLightsServer switchLightsServer = new SwitchLightsServer();
@@ -44,6 +45,7 @@ public class SwitchLightsServer extends SwitchLightsServiceImplBase {
     @Override
     public void switchLight(SwitchLightRequest switchLightRequest, StreamObserver<SwitchLightResponse> responseObserver) {
         String message = switchLightRequest.getLight() ? "The light was turned on!" : "The light was turned off!";
+        response = message;
 
         System.out.println(switchLightRequest.getLight() ? "Request to turn on the lights received from Client." : "Request to turn off the lights received from client");
 

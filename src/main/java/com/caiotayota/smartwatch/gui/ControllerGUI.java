@@ -4,6 +4,8 @@ import com.caiotayota.smartwatch.musicPlayer.MusicPlayerClient;
 import com.caiotayota.smartwatch.musicPlayer.MusicPlayerServer;
 import com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringClient;
 import com.caiotayota.smartwatch.sleepMonitoring.SleepMonitoringServer;
+import com.caiotayota.smartwatch.switchLights.SwitchLightsClient;
+import com.caiotayota.smartwatch.switchLights.SwitchLightsServer;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -17,6 +19,8 @@ public class ControllerGUI implements ActionListener {
     private JTextArea reply2;
     private JTextField entry3, reply3;
     private JTextField entry4, reply4;
+
+    private boolean isSwitchLightsServerOn = false;
 
 
     private JPanel getService1JPanel() throws InterruptedException {
@@ -88,34 +92,51 @@ public class ControllerGUI implements ActionListener {
         return panel;
 
     }
-//
-//    private JPanel getService3JPanel() {
-//
-//        JPanel panel = new JPanel();
-//
-//        BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
-//
-//        JLabel label = new JLabel("Enter value")	;
-//        panel.add(label);
-//        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-//        entry3 = new JTextField("",10);
-//        panel.add(entry3);
-//        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-//
-//        JButton button = new JButton("Invoke Service 3");
-//        button.addActionListener(this);
-//        panel.add(button);
-//        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-//
-//        reply3 = new JTextField("", 10);
-//        reply3 .setEditable(false);
-//        panel.add(reply3 );
-//
-//        panel.setLayout(boxlayout);
-//
-//        return panel;
-//
-//    }
+
+    private JPanel getService3JPanel() {
+
+        JPanel panel = new JPanel();
+
+        BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+
+        JLabel label = new JLabel("Switch Light:");
+        panel.add(label);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+
+        JButton button1 = new JButton("Living Room");
+        button1.setMinimumSize(new Dimension(300, 50));
+        button1.addActionListener(this);
+        panel.add(button1);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JButton button2 = new JButton("Kitchen");
+        button2.setMinimumSize(new Dimension(300, 50));
+        button2.addActionListener(this);
+        panel.add(button2);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JButton button3 = new JButton("Bedroom 1");
+        button3.setMinimumSize(new Dimension(300, 50));
+        button3.addActionListener(this);
+        panel.add(button3);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JButton button4 = new JButton("Outside");
+        button4.setPreferredSize(new Dimension(300, 50));
+        button4.addActionListener(this);
+        panel.add(button4);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        reply3 = new JTextField("", 10);
+        reply3 .setEditable(false);
+        panel.add(reply3);
+
+        panel.setLayout(boxlayout);
+
+        return panel;
+
+    }
 //
 //    private JPanel getService4JPanel() {
 //
@@ -172,14 +193,14 @@ public class ControllerGUI implements ActionListener {
         tp1.setBounds(50, 50, 200, 200);
         tp1.add("Sleep Monitoring", panel2);
 
-//        JPanel panel3 = new JPanel();
-//        panel3.setBorder(new EmptyBorder(new Insets(50, 100, 50, 100)));
-//        panel3.add(getService1JPanel());
-//
-//        JTabbedPane tp3 = new JTabbedPane();
-//        tp1.setBounds(50, 50, 200, 200);
-//        tp1.add("Switch Lights", panel3);
-//
+        JPanel panel3 = new JPanel();
+        panel3.setBorder(new EmptyBorder(new Insets(50, 100, 50, 100)));
+        panel3.add(getService3JPanel());
+
+        JTabbedPane tp3 = new JTabbedPane();
+        tp1.setBounds(50, 50, 200, 200);
+        tp1.add("Switch Lights", panel3);
+
 //        JPanel panel4 = new JPanel();
 //        panel4.setBorder(new EmptyBorder(new Insets(50, 100, 50, 100)));
 //        panel4.add(getService1JPanel());
@@ -270,8 +291,187 @@ public class ControllerGUI implements ActionListener {
             }
 
 
+        } else if (label.equals("Living Room")) {
+
+            if (!isSwitchLightsServerOn) {
+                try {
+                    Thread switchLightsServerThread = new Thread() {
+                        @Override
+                        public void run() {
+                            SwitchLightsServer.main(new String[]{});
+                        }
+                    };
+                    switchLightsServerThread.start();
+                    isSwitchLightsServerOn = true;
+                    Thread switchLightsClientThread = new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                SwitchLightsClient.main(new String[]{});
+                                reply3.setText(SwitchLightsServer.response);
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    };
+                    switchLightsClientThread.start();
+
+
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else {
+
+                SwitchLightsClient.switchLight();
+                reply3.setText(SwitchLightsServer.response);
+
+            }
+
+
+        } else if (label.equals("Kitchen")) {
+
+        if (!isSwitchLightsServerOn) {
+            try {
+                Thread switchLightsServerThread = new Thread() {
+                    @Override
+                    public void run() {
+                        SwitchLightsServer.main(new String[]{});
+                    }
+                };
+                switchLightsServerThread.start();
+                isSwitchLightsServerOn = true;
+                Thread switchLightsClientThread = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            SwitchLightsClient.main(new String[]{});
+                            reply3.setText(SwitchLightsServer.response);
+                        } catch (Exception ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                };
+                switchLightsClientThread.start();
+
+
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        } else {
+
+            SwitchLightsClient.switchLight();
+            reply3.setText(SwitchLightsServer.response);
+
+        }
+        } else if (label.equals("Living Room")) {
+
+            if (!isSwitchLightsServerOn) {
+                try {
+                    Thread switchLightsServerThread = new Thread() {
+                        @Override
+                        public void run() {
+                            SwitchLightsServer.main(new String[]{});
+                        }
+                    };
+                    switchLightsServerThread.start();
+                    isSwitchLightsServerOn = true;
+                    Thread switchLightsClientThread = new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                SwitchLightsClient.main(new String[]{});
+                                reply3.setText(SwitchLightsServer.response);
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    };
+                    switchLightsClientThread.start();
+
+
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else {
+
+                SwitchLightsClient.switchLight();
+                reply3.setText(SwitchLightsServer.response);
+
+            }
+
+
+        } else if (label.equals("Bedroom 1")) {
+
+        if (!isSwitchLightsServerOn) {
+            try {
+                Thread switchLightsServerThread = new Thread() {
+                    @Override
+                    public void run() {
+                        SwitchLightsServer.main(new String[]{});
+                    }
+                };
+                switchLightsServerThread.start();
+                isSwitchLightsServerOn = true;
+                Thread switchLightsClientThread = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            SwitchLightsClient.main(new String[]{});
+                            reply3.setText(SwitchLightsServer.response);
+                        } catch (Exception ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                };
+                switchLightsClientThread.start();
+
+
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        } else {
+
+            SwitchLightsClient.switchLight();
+            reply3.setText(SwitchLightsServer.response);
+
         }
 
-    }
 
+    } else if (label.equals("Outside")) {
+
+            if (!isSwitchLightsServerOn) {
+                try {
+                    Thread switchLightsServerThread = new Thread() {
+                        @Override
+                        public void run() {
+                            SwitchLightsServer.main(new String[]{});
+                        }
+                    };
+                    switchLightsServerThread.start();
+                    isSwitchLightsServerOn = true;
+                    Thread switchLightsClientThread = new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                SwitchLightsClient.main(new String[]{});
+                                reply3.setText(SwitchLightsServer.response);
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    };
+                    switchLightsClientThread.start();
+
+
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else {
+
+                SwitchLightsClient.switchLight();
+                reply3.setText(SwitchLightsServer.response);
+
+            }
+        }
+    }
 }

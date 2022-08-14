@@ -14,10 +14,11 @@ public class SwitchLightsClient {
     private static Logger logger = Logger.getLogger(com.caiotayota.smartwatch.musicPlayer.MusicPlayerClient.class.getName());
     private static SwitchLightsServiceBlockingStub blockingStub;
     private static SwitchLightsServiceStub asyncStub;
+    private static boolean isLightOn = false;
+    static SwitchLightsClient switchLightsClient = new SwitchLightsClient();
 
     public static void main(String[] args) {
 
-        SwitchLightsClient switchLightsClient = new SwitchLightsClient();
 
         String service_type = "_switch-lights._tcp.local.";
         SimpleServiceDiscovery.run(service_type);
@@ -31,14 +32,16 @@ public class SwitchLightsClient {
         asyncStub = SwitchLightsServiceGrpc.newStub(channel);
 
         switchLight();
-        channel.shutdown();
+//        channel.shutdown();
     }
 
     public static void switchLight() {
         boolean random = Math.round(Math.random()) != 0;
 
-        SwitchLightRequest switchLightRequest = SwitchLightRequest.newBuilder().setLight(random).build();
+
+        SwitchLightRequest switchLightRequest = SwitchLightRequest.newBuilder().setLight(!isLightOn).build();
         SwitchLightResponse response = blockingStub.switchLight(switchLightRequest);
+        isLightOn = !isLightOn;
 
         System.out.println(response.getSwitchLightMessage());
 
