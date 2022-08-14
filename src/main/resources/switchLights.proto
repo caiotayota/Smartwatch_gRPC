@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.caiotayota.smartwatch.switchLights";
+option java_outer_classname = "SwitchLightsServiceImpl";
+
+package switchLights;
+
+service SwitchLightsService {
+
+  // Unary call
+  rpc switchLight(SwitchLightRequest) returns (SwitchLightResponse) {}
+}
+
+message SwitchLightRequest {
+  bool light = 1;
+}
+
+message SwitchLightResponse {
+  string switchLightMessage = 1;
+}
